@@ -11,16 +11,18 @@ class Game(players: Set[Player],
 
     val baseScore = calculateBasePoints() * contract.coefficient
 
-    players.map {
-      case p if p == challenger => partner match {
-        case Some(x) => (p, 2 * baseScore)
-        case _ => (p, (players.size - 1) * baseScore)
-      }
-      case p => partner match {
-        case Some(x) if x == p => (p, baseScore)
-        case _ => (p, -baseScore)
-      }
-    }.toMap
+    players.map(calculatePlayerScore(_, baseScore)).toMap
+  }
+
+  private def calculatePlayerScore(player: Player, baseScore: Int) = player match {
+    case p if p == challenger => partner match {
+      case Some(x) => (p, 2 * baseScore)
+      case _ => (p, (players.size - 1) * baseScore)
+    }
+    case p => partner match {
+      case Some(x) if x == p => (p, baseScore)
+      case _ => (p, -baseScore)
+    }
   }
 
   def calculateBasePoints(): Int = {
