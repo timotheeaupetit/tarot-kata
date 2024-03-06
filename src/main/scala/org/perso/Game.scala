@@ -15,22 +15,18 @@ class Game(players: Set[Player],
       case 3 => trickPoints - 36
     }
 
-    val baseScore = if (diff >= 0) {
-      25 + diff.toInt
-    } else {
-      -(25 + diff.abs.toInt)
-    }
+    val basePoints = ((25 + diff.abs.toInt) * diff / diff.abs).toInt
 
-    val score = baseScore * contract.coefficient
+    val baseScore = basePoints * contract.coefficient
 
     players.map {
       case p if p == challenger => partner match {
-        case Some(x) => (p, 2 * score)
-        case _ => (p, (players.size - 1) * score)
+        case Some(x) => (p, 2 * baseScore)
+        case _ => (p, (players.size - 1) * baseScore)
       }
       case p => partner match {
-        case Some(x) if x == p => (p, score)
-        case _ => (p, -score)
+        case Some(x) if x == p => (p, baseScore)
+        case _ => (p, -baseScore)
       }
     }.toMap
   }
