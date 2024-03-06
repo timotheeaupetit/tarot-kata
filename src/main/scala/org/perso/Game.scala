@@ -4,7 +4,8 @@ class Game(players: Set[Player],
            challenger: Player,
            contract: Contract,
            trickPoints: Float,
-           oudlers: Int) {
+           oudlers: Int,
+           partner: Option[Player] = None) {
 
   def calculateScores: Map[Player, Int] = {
     val diff = oudlers match {
@@ -23,8 +24,14 @@ class Game(players: Set[Player],
     val score = baseScore * contract.coefficient
 
     players.map {
-      case p if p == challenger => (p, (players.size - 1) * score)
-      case p => (p, -score)
+      case p if p == challenger => partner match {
+        case Some(x) => (p, 2 * score)
+        case _ => (p, (players.size - 1) * score)
+      }
+      case p => partner match {
+        case Some(x) if x == p => (p, score)
+        case _ => (p, -score)
+      }
     }.toMap
   }
 }
