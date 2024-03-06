@@ -225,4 +225,44 @@ class GameTest extends AnyFunSpec {
       }
     }
   }
+
+  describe("calculateBasePoints") {
+    val players = Set(p1, p2, p3, p4)
+
+    it("should give 25 for a Petite won with 3 oudlers and 36 trick points") {
+      val game = new Game(
+        players,
+        challenger = p1,
+        contract = Petite,
+        trickPoints = 36,
+        oudlers = 3
+      )
+
+      assert(game.calculateBasePoints() == 25)
+    }
+
+    it("should give 25 for a Petite won with 3 oudlers and 36.5 trick points") {
+      val game = new Game(
+        players,
+        challenger = p1,
+        contract = Petite,
+        trickPoints = 36.5,
+        oudlers = 3
+      )
+
+      assert(game.calculateBasePoints() == 25)
+    }
+
+    it("should give -25 for a Petite lost with 3 oudlers and 35.5 trick points") {
+      val game = new Game(
+        players,
+        challenger = p1,
+        contract = Petite,
+        trickPoints = 35.5,
+        oudlers = 3
+      )
+
+      assert(game.calculateBasePoints() == -25)
+    }
+  }
 }
