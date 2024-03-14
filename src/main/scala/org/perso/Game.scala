@@ -33,8 +33,14 @@ class Game(players: Set[Player],
       case 3 => trickPoints - 36
     }
 
-    val sign = if (diff >= 0) 1 else -1
+    val contract = 25
 
-    ((25 + diff.abs) * sign).toInt
+    val bp = if (diff >= 0) {
+      contract + diff.ceil
+    } else {
+      -contract + diff.floor
+    }
+
+    bp.toInt
   }
 }
