@@ -93,7 +93,7 @@ class GameTest extends AnyFunSpec {
           players,
           challenger = p2,
           contract = GardeSans,
-          trickPoints = 53,
+          trickPoints = 52.5,
           oudlers = 2
         )
 
@@ -211,7 +211,7 @@ class GameTest extends AnyFunSpec {
           players,
           challenger = p1,
           contract = GardeContre,
-          trickPoints = 50,
+          trickPoints = 50.5,
           oudlers = 1,
         )
 
@@ -241,7 +241,7 @@ class GameTest extends AnyFunSpec {
       assert(game.calculateBasePoints() == 25)
     }
 
-    it("should give 25 for a Petite won with 3 oudlers and 36.5 trick points") {
+    it("should give 26 for a Petite won with 3 oudlers and 36.5 trick points") {
       val game = new Game(
         players,
         challenger = p1,
@@ -250,10 +250,10 @@ class GameTest extends AnyFunSpec {
         oudlers = 3
       )
 
-      assert(game.calculateBasePoints() == 25)
+      assert(game.calculateBasePoints() == 26)
     }
 
-    it("should give -25 for a Petite lost with 3 oudlers and 35.5 trick points") {
+    it("should give -26 for a Petite lost with 3 oudlers and 35.5 trick points") {
       val game = new Game(
         players,
         challenger = p1,
@@ -262,7 +262,7 @@ class GameTest extends AnyFunSpec {
         oudlers = 3
       )
 
-      assert(game.calculateBasePoints() == -25)
+      assert(game.calculateBasePoints() == -26)
     }
   }
 }
