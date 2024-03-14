@@ -1,7 +1,7 @@
 # Tarot kata
 
 ## Introduction
-The [French tarot](https://fr.wikipedia.org/wiki/Tarot_fran%C3%A7ais) is a competitive card game.
+The [French tarot](https://fr.wikipedia.org/wiki/Tarot_fran%C3%A7ais) is a competitive card game. Here are the complete [official rules](https://www.fftarot.fr/assets/documents/R-RO201206.pdf).
 The goal is to score the most points.
 
 It's officially played with 4 players, but there are variants with 3 or 5 players.
